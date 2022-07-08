@@ -10,7 +10,7 @@
     <li> Endpoint Authorization
     <ul>
         <li>Profile : url/api/profile</li>
-        <li>Logout : url/api/logout<
+        <li>Logout : url/api/logout</li>
         <li>Get Queue : url/api/queue</li>
         <li>Get by Id Queue : url/api/queue/id</li>
         <li>Post Queue : url/api/queue</li>
