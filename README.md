@@ -20,4 +20,6 @@
     </li>
     <li>Reference : https://codelapan.com/post/laravel-8-rest-api-authentication-dengan-sanctum
 </li>
+<li>Documentation : https://documenter.getpostman.com/view/19977900/UzQuPRJi</li>
+
 </ul>

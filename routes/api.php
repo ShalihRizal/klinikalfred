@@ -33,7 +33,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('/show/{id}', [QueueController::class, 'show'])->middleware(['cors']);
         Route::post('/store', [QueueController::class, 'store'])->middleware(['cors']);
         Route::post('/update/{id}', [QueueController::class, 'update'])->middleware(['cors']);
-        Route::delete('/delete/{id}', [QueueController::class, 'delete'])->middleware(['cors']);
+        Route::delete('/delete/{id}', [QueueController::class, 'destroy'])->middleware(['cors']);
     });
 
     // API route for logout user
