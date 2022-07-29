@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\QueueController;
 
@@ -23,6 +24,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/logout', [AuthController::class, 'logout_user']);
 
 // Queue
 Route::prefix('queue')->group(function () {
