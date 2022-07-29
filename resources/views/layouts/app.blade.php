@@ -80,14 +80,11 @@
           <li class="nav-item">
             <a class="nav-link dropdown-toggle text-muted pr-0" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="avatar avatar-sm mt-2">
-              @if(Auth::user()->user_image == NULL)
+
                                     <img src="/img/avatars/profile.jpg"
                                     class="avatar-img rounded-circle" alt="user_name" />
-                                @else
-                                <img src="{{Auth::user()->user_image}}"
-                                    class="avatar-img rounded-circle" alt="user_name" />
-                                @endif
-                                <span>{{ Auth::user()->user_name }}</span>
+
+                                <span>{{ Auth::user()->name }}</span>
                             </span>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
