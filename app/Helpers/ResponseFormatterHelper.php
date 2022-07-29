@@ -63,4 +63,43 @@ class ResponseFormatterHelper
 
         return response()->json(self::$response);
     }
+
+    // Response Formatter
+	/**
+	 * Success Response
+	 * @param data response default null
+	 * @param message response default null
+	 * @return (json)
+	 *
+	 */
+	public static function _successResponse($data = null, $message = null)
+	{
+		$response = [
+			'status' 	=> 1,
+			'message'	=> $message,
+			'result'	=> $data,
+			'time'		=> date('Y-m-d H:i:s')
+		];
+
+		return response()->json($response);
+	}
+
+	/**
+	 * Error Response
+	 * @param data response default null
+	 * @param message response default null
+	 * @return (json)
+	 *
+	 */
+	public static function _errorResponse($data = null, $message = null)
+	{
+		$response = [
+			'status' 	=> 0,
+			'message'	=> $message,
+			'result'	=> $data,
+			'time'		=> date('Y-m-d H:i:s')
+		];
+
+		return response()->json($response);
+	}
 }
