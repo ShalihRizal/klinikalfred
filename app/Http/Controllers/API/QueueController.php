@@ -63,7 +63,6 @@ class QueueController extends Controller
                 'queue_status' => $request->queue_status,
             ];
 
-            $request->headers->set('Accept', 'application/json');
 		    Queue::create($Queue);
 
             return ResponseFormatterHelper::successResponse($Queue, 'Create Queue Success');
@@ -125,7 +124,6 @@ class QueueController extends Controller
                 'queue_status' => $request->queue_status,
             ];
 
-            $request->headers->set('Accept', 'application/json');
             $Queue->update($Queues);
 
             return ResponseFormatterHelper::successResponse($Queues, 'Update Queues Success');
