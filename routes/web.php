@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\QueueController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,4 +18,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Auth::routes();
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+// Queue
+Route::prefix('queue')->group(function () {
+    Route::get('/', [QueueController::class, 'index']);
+    Route::get('/show/{id}', [QueueController::class, 'show']);
+    Route::post('/store', [QueueController::class, 'store']);
+    Route::post('/update/{id}', [QueueController::class, 'update']);
+    Route::get('/delete/{id}', [QueueController::class, 'destroy']);
+    Route::get('/getdata/{id}', [QueueController::class, 'getdata']);
 });
