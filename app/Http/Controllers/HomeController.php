@@ -27,9 +27,10 @@ class HomeController extends Controller
     {
         $Queues = Queue::get();
         $startQueues = Queue::where('queue_status', 0)->get();
-        $finishQueues = Queue::where('queue_status', 1)->get();
+        $progressQueues = Queue::where('queue_status', 1)->get();
+        $finishQueues = Queue::where('queue_status', 2)->get();
         $Users = User::get();
 
-        return view('home', compact('Queues', 'Users', 'startQueues', 'finishQueues'));
+        return view('home', compact('Queues', 'Users', 'startQueues', 'progressQueues', 'finishQueues'));
     }
 }

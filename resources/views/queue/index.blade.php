@@ -69,8 +69,10 @@
                                 </td>
                                 <td width="35%">{{ $Queue->queue_number }}</td>
                                 <td width="15%">
-                                    @if($Queue->queue_status == 1)
+                                    @if($Queue->queue_status == 2)
                                         <span class="btn btn-success text-white">Sudah dilayani</span>
+                                    @elseif($Queue->queue_status == 1)
+                                        <span class="btn btn-warning text-white">Sedang dilayani</span>
                                     @elseif($Queue->queue_status == 0)
                                         <span class="btn btn-danger text-white">Belum dilayani</span>
                                     @endif
@@ -159,7 +161,8 @@
                                     <label class="form-label">Pilih Status </label>
                                     <select class="form-control" name="queue_status" id="queue_status">
                                         <option value="">- Pilih Status -</option>
-                                        <option value="1">Sudah dilayani</option>
+                                        <option value="2">Sudah dilayani</option>
+                                        <option value="1">Sedang dilayani</option>
                                         <option value="0">Belum dilayani</option>
                                     </select>
                                 </div>
