@@ -11,5 +11,5 @@ class Queue extends Model
 
     protected $table = 'queues';
 
-    protected $fillable = ['user_id', 'queue_number', 'queue_status'];
+    protected $fillable = ['user_id', 'queue_number', 'queue_status', 'created_at', 'updated_at'];
 }

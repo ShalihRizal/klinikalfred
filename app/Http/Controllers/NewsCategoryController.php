@@ -3,17 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Queue;
-use App\Models\User;
+use App\Models\NewsCategory;
 use App\Helpers\ResponseFormatterHelper;
 use Illuminate\Support\Facades\Auth;
 
-class QueueController extends Controller
+class NewsCategoryController extends Controller
 {
     public function __construct()
     {
         // $this->middleware('auth');
-        $this->component = "Component Queue";
+        $this->component = "Component News Category";
     }
     /**
      * Display a listing of the resource.
@@ -22,10 +21,10 @@ class QueueController extends Controller
      */
     public function index()
     {
-        $Queues = Queue::get();
+        $NewsCategories = NewsCategory::get();
         $Users = User::get();
 
-        return view('queue.index', compact('Queues', 'Users'));
+        return view('news_category.index', compact('NewsCategories', 'Users'));
     }
 
     /**
@@ -46,15 +45,14 @@ class QueueController extends Controller
      */
     public function store(Request $request)
     {
-        $Queue = [
-            'user_id' => $request->user_id,
-            'queue_number' => $request->queue_number,
-            'queue_status' => $request->queue_status,
+        $NewsCategory = [
+            'user_id' => Auth::user()->id,
+            'news_category_name' => $request->news_category_name,
         ];
 
-        Queue::create($Queue);
+        NewsCategory::create($NewsCategory);
 
-        return redirect('queue');
+        return redirect('news-category');
     }
 
     /**
@@ -65,7 +63,7 @@ class QueueController extends Controller
      */
     public function show($id)
     {
-        $Queue = Queue::find($id);
+        $NewsCategory = NewsCategory::find($id);
     }
 
     /**
@@ -88,39 +86,16 @@ class QueueController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $Queue = Queue::find($id);
+        $NewsCategory = NewsCategory::find($id);
 
-            $Queues = [
-                'user_id' => $request->user_id,
-                'queue_number' => $request->queue_number,
-                'queue_status' => $request->queue_status,
+            $NewsCategories = [
+                'user_id' => Auth::user()->id,
+                'news_category_name' => $request->news_category_name,
             ];
 
-            $Queue->update($Queues);
+            $NewsCategory->update($NewsCategories);
 
-            return redirect('queue');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update_user(Request $request, $id)
-    {
-        $Queue = Queue::find($id);
-
-            $Queues = [
-                'user_id' => $request->user_id,
-                'queue_number' => $request->queue_number,
-                'queue_status' => $request->queue_status,
-            ];
-
-            $Queue->update($Queues);
-
-            return redirect('home');
+            return redirect('news-category');
     }
 
     /**
@@ -131,9 +106,9 @@ class QueueController extends Controller
      */
     public function destroy($id)
     {
-        Queue::destroy($id);
+        NewsCategory::destroy($id);
 
-        return redirect('queue');
+        return redirect('news-category');
     }
 
     /**
@@ -143,7 +118,7 @@ class QueueController extends Controller
      */
     public function getdata($id)
     {
-        $getDetail  = Queue::find($id);
+        $getDetail  = NewsCategory::find($id);
 
         if ($getDetail)
             return ResponseFormatterHelper::_successResponse($getDetail, 'Data berhasil ditemukan');

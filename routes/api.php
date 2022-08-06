@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\QueueController;
+use App\Http\Controllers\API\NewsCategoryController;
+use App\Http\Controllers\API\NewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +36,24 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/store', [QueueController::class, 'store'])->middleware(['cors']);
         Route::post('/update/{id}', [QueueController::class, 'update'])->middleware(['cors']);
         Route::delete('/delete/{id}', [QueueController::class, 'destroy'])->middleware(['cors']);
+    });
+
+    // News Category
+    Route::prefix('news-category')->group(function () {
+        Route::get('/', [NewsCategoryController::class, 'index'])->middleware(['cors']);
+        Route::get('/show/{id}', [NewsCategoryController::class, 'show'])->middleware(['cors']);
+        Route::post('/store', [NewsCategoryController::class, 'store'])->middleware(['cors']);
+        Route::post('/update/{id}', [NewsCategoryController::class, 'update'])->middleware(['cors']);
+        Route::delete('/delete/{id}', [NewsCategoryController::class, 'destroy'])->middleware(['cors']);
+    });
+
+    // News
+    Route::prefix('news')->group(function () {
+        Route::get('/', [NewsController::class, 'index'])->middleware(['cors']);
+        Route::get('/show/{id}', [NewsController::class, 'show'])->middleware(['cors']);
+        Route::post('/store', [NewsController::class, 'store'])->middleware(['cors']);
+        Route::post('/update/{id}', [NewsController::class, 'update'])->middleware(['cors']);
+        Route::delete('/delete/{id}', [NewsController::class, 'destroy'])->middleware(['cors']);
     });
 
     // API route for logout user
