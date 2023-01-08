@@ -49,6 +49,7 @@ class QueueController extends Controller
         $Queue = [
             'user_id' => $request->user_id,
             'queue_number' => $request->queue_number,
+            'priority_number' => $request->priority_number,
             'queue_status' => $request->queue_status,
         ];
 
@@ -93,6 +94,7 @@ class QueueController extends Controller
             $Queues = [
                 'user_id' => $request->user_id,
                 'queue_number' => $request->queue_number,
+                'priority_number' => $request->priority_number,
                 'queue_status' => $request->queue_status,
             ];
 
@@ -115,6 +117,7 @@ class QueueController extends Controller
             $Queues = [
                 'user_id' => $request->user_id,
                 'queue_number' => $request->queue_number,
+                'priority_number' => $request->priority_number,
                 'queue_status' => $request->queue_status,
             ];
 

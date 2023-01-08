@@ -60,6 +60,7 @@ class QueueController extends Controller
             $Queue = [
                 'user_id' => Auth::user()->id,
                 'queue_number' => $request->queue_number,
+                'priority_number' => $request->priority_number,
                 'queue_status' => $request->queue_status,
             ];
 
@@ -121,6 +122,7 @@ class QueueController extends Controller
             $Queues = [
                 'user_id' => Auth::user()->id,
                 'queue_number' => $request->queue_number,
+                'priority_number' => $request->priority_number,
                 'queue_status' => $request->queue_status,
             ];
 

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('user_id');
             $table->bigInteger('queue_number');
+            $table->bigInteger('priority_number');
             $table->integer('queue_status')->default(0);
             $table->timestamps();
         });
