@@ -46,6 +46,7 @@
                             <tr>
                                 <th width="5%">No</th>
                                 <th width="35%">Pengguna</th>
+                                <th width="35%">Prioritas</th>
                                 <th width="35%">Antrian</th>
                                 <th width="15%">Status</th>
                                 <th width="15%">Aksi</th>
@@ -67,6 +68,7 @@
                                     @endif
                                     @endforeach
                                 </td>
+                                <td width="35%">{{ $Queue->priority_number }}</td>
                                 <td width="35%">{{ $Queue->queue_number }}</td>
                                 <td width="15%">
                                     @if($Queue->queue_status == 2)
@@ -148,6 +150,16 @@
 
                             <div class="col-md-12">
                                 <div class="form-group">
+                                        <label class="form-label">Prioritas</label>
+                                        <input type="text" class="form-control" name="priority_number"
+                                            id="priority_number" placeholder="Masukan Posisi Antrian"
+                                            value="{{ old('priority_number') }}">
+
+                                    </div>
+                                </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
                                         <label class="form-label">Posisi Antrian</label>
                                         <input type="text" class="form-control" name="queue_number"
                                             id="queue_number" placeholder="Masukan Posisi Antrian"
@@ -214,6 +226,7 @@
                     $('#access_token_device_id').val(data.result.access_token_device_id);
                     $('#user_id').val(data.result.user_id);
                     $('#queue_number').val(data.result.queue_number);
+                    $('#priority_number').val(data.result.priority_number);
                     $('#queue_status').val(data.result.queue_status);
                     $('.addModal .modal-title').text('Ubah Antrian');
                     $('.addModal').modal('show');
