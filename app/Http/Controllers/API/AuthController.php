@@ -50,6 +50,14 @@ class AuthController extends Controller
             ->json(['message' => 'Hi '.$user->name.', welcome to home','access_token' => $token, 'token_type' => 'Bearer', ]);
     }
 
+    public function getProfile($email)
+    {
+        $user = User::where('email', $email)->firstOrFail();
+
+        return response()
+            ->json(['message' => $user]);
+    }
+
     // method for user logout and delete token
     public function logout()
     {
