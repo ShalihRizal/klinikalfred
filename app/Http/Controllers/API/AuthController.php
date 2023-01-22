@@ -54,8 +54,7 @@ class AuthController extends Controller
     {
         $user = User::where('email', $email)->firstOrFail();
 
-        return response()
-            ->json(['message' => $user]);
+        return response()->json($user);
     }
 
     // method for user logout and delete token
