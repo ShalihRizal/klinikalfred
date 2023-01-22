@@ -27,7 +27,7 @@ class NewsController extends Controller
         $News = News::get();
         $Users = User::get();
 
-        return view('news_category.index', compact('NewsCategories', 'News', 'Users'));
+        return view('news.index', compact('NewsCategories', 'News', 'Users'));
     }
 
     /**
