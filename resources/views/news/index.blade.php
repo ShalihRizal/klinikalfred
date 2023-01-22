@@ -116,7 +116,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-label">Kategori Berita </label>
-                                    <select class="form-control" name="user_id" id="user_id">
+                                    <select class="form-control" name="news_category_id" id="news_category_id">
                                         <option value="">- Pilih Kategori Berita -</option>
                                         @if(sizeof($NewsCategories) > 0)
                                         @foreach($NewsCategories as $NewsCategory)
