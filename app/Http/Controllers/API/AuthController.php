@@ -34,7 +34,7 @@ class AuthController extends Controller
             $password = $Users->password;
         }
 
-        $user = User::create([
+        $user = [
             'name' => $request->name,
             'email' => $request->email,
             'address' => $request->address,
@@ -42,7 +42,7 @@ class AuthController extends Controller
             'age' => $request->age,
             'gender' => $request->gender,
             'password' => $password
-         ]);
+         ];
 
          $Users->update($User);
 
@@ -64,6 +64,10 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'address' => $request->address,
+            'date_of_birth' => $request->date_of_birth,
+            'age' => $request->age,
+            'gender' => $request->gender,
             'password' => Hash::make($request->password)
          ]);
 
