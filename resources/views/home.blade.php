@@ -187,6 +187,16 @@
                                                             </div>
                                                         </div>
 
+                                                        <div class="col-md-12" hidden>
+                                                            <div class="form-group">
+                                                                    <label class="form-label">Prioritas Antrian</label>
+                                                                    <input type="text" class="form-control" name="priority_number"
+                                                                        id="priority_number" placeholder="Masukan Prioritas Antrian"
+                                                                        value="{{$Queue->priority_number}}{{ old('priority_number') }}">
+
+                                                                </div>
+                                                            </div>
+
                                                     <div class="col-md-12" hidden>
                                                         <div class="form-group">
                                                                 <label class="form-label">Posisi Antrian</label>

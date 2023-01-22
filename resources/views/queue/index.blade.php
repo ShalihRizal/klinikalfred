@@ -152,7 +152,7 @@
                                 <div class="form-group">
                                         <label class="form-label">Prioritas</label>
                                         <input type="text" class="form-control" name="priority_number"
-                                            id="priority_number" placeholder="Masukan Posisi Antrian"
+                                            id="priority_number" placeholder="Masukan Prioritas Antrian"
                                             value="{{ old('priority_number') }}">
 
                                     </div>
