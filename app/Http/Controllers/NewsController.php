@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\NewsCategory;
 use App\Models\News;
+use App\Models\User;
 use App\Helpers\ResponseFormatterHelper;
 use Illuminate\Support\Facades\Auth;
 
