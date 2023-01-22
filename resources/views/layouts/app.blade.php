@@ -118,6 +118,18 @@
                   <span class="ml-3 item-text">Antrian</span>
                 </a>
               </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/news-category">
+                  <i class="fe fe-archive fe-16"></i>
+                  <span class="ml-3 item-text">Kategori Berita</span>
+                </a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/news">
+                  <i class="fe fe-bookmark fe-16"></i>
+                  <span class="ml-3 item-text">Berita</span>
+                </a>
+              </li>
 
 
             {{-- Navbar --}}

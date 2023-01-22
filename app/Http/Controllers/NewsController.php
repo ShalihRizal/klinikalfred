@@ -22,10 +22,11 @@ class NewsController extends Controller
      */
     public function index()
     {
+        $NewsCategories = NewsCategory::get();
         $News = News::get();
         $Users = User::get();
 
-        return view('news_category.index', compact('News', 'Users'));
+        return view('news_category.index', compact('NewsCategories', 'News', 'Users'));
     }
 
     /**
