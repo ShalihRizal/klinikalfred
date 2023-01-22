@@ -30,6 +30,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     })->middleware(['cors']);
 
     Route::get('/getprofile/{email}', [AuthController::class, 'getProfile'])->middleware(['cors']);
+    Route::put('/updateprofile/{email}', [AuthController::class, 'updateProfile'])->middleware(['cors']);
 
     // Queue
     Route::prefix('queue')->group(function () {

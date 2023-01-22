@@ -151,7 +151,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                             <label class="form-label">Deskripsi Berita</label>
-                                            <textarea name="news_description" id="news_description" cols="30" rows="10">{{ old('news_description') }}</textarea>
+                                            <textarea name="news_description" id="news_description" class="form-control" cols="30" rows="10">{{ old('news_description') }}</textarea>
                                             {{-- <input type="text" class="form-control" name="news_description"
                                                 id="news_description" placeholder="Masukan Deskripsi Berita"
                                                 value="{{ old('news_description') }}"> --}}

@@ -10,6 +10,47 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
+    public function updateProfile($email)
+    {
+        $validator = Validator::make($request->all(),[
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'full_name' => 'required|string',
+            'address' => 'required|string',
+            'date_of_birth' => 'required|string',
+            'age' => 'required|string',
+            'gender' => 'required|string',
+            'password' => 'required|string|min:8'
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors());
+        }
+
+        $Users = User::find($id);
+
+        if ($request->password != null) {
+            $password = Hash::make($request->password);
+        }else{
+            $password = $Users->password;
+        }
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'full_name' => $request->full_name,
+            'address' => $request->address,
+            'date_of_birth' => $request->date_of_birth,
+            'age' => $request->age,
+            'gender' => $request->gender,
+            'password' => $password
+         ]);
+
+         $Users->update($User);
+
+        return response()->json($Users);
+    }
+
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(),[
