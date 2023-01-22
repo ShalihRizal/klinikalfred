@@ -22,7 +22,7 @@ class QueueController extends Controller
      */
     public function index()
     {
-        $Queues = Queue::orderBy('queue_number', 'asc')->get();
+        $Queues = Queue::where('queue_status', 0)->orderBy('queue_number', 'asc')->get();
         $Users = User::get();
 
         return view('queue.index', compact('Queues', 'Users'));
