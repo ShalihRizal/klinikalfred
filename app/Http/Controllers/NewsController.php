@@ -94,7 +94,7 @@ class NewsController extends Controller
     {
         $News = News::find($id);
 
-            $News = [
+            $Newsv = [
                 'user_id' => Auth::user()->id,
                 'news_category_id' => $request->news_category_id,
                 'news_title' => $request->news_title,
@@ -102,7 +102,7 @@ class NewsController extends Controller
                 'news_description' => $request->news_description,
             ];
 
-            $News->update($News);
+            $News->update($Newsv);
 
             return redirect('news');
     }
