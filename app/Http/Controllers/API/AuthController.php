@@ -13,12 +13,12 @@ class AuthController extends Controller
     public function updateProfile(Request $request, $email)
     {
         $validator = Validator::make($request->all(),[
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'address' => 'required|string',
-            'date_of_birth' => 'required|string',
-            'age' => 'required|string',
-            'gender' => 'required|string',
+            'name' => 'required',
+            'email' => 'required',
+            'address' => 'required',
+            'date_of_birth' => 'required',
+            'age' => 'required',
+            'gender' => 'required',
         ]);
 
         if($validator->fails()){
