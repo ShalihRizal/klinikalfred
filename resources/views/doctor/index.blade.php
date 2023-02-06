@@ -99,7 +99,7 @@
                 <h5 class="modal-title">Tambah Dokter</h5>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-            <form action="{{ url('doctor/store') }}" method="POST" id="addForm">
+            <form action="{{ url('doctor/store') }}" method="POST" id="addForm" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     <div class="form-body">
