@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Helpers\DataHelper;
 use App\Helpers\ResponseFormatterHelper;
 use Illuminate\Http\Request;
 use App\Models\Doctor;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class DoctorController extends Controller
 {
@@ -57,9 +59,14 @@ class DoctorController extends Controller
     public function store(Request $request)
     {
         try {
+            $file = $request->doctor_image;
+            $fileName_doctor = DataHelper::getFileName($file);
+            $filePath = DataHelper::getFilePath(false, true);
+            $request->file('doctor_image')->storeAs($filePath, $fileName_doctor, 'public');
+
             $Doctor = [
                 'doctor_name' => $request->doctor_name,
-                'doctor_image' => $request->doctor_image,
+                'doctor_image' => $fileName_doctor,
                 'doctor_speciality' => $request->doctor_speciality,
             ];
 
@@ -117,12 +124,25 @@ class DoctorController extends Controller
     {
         try {
             $Doctor = Doctor::find($id);
+            if ($request->doctor_image <> "") {
+                Storage::delete('public/' . $filePath . $Doctor->doctor_image);
 
-            $Doctor = [
-                'doctor_name' => $request->doctor_name,
-                'doctor_image' => $request->doctor_image,
-                'doctor_speciality' => $request->doctor_speciality,
-            ];
+                $file = $request->doctor_image;
+                $fileName_doctor = DataHelper::getFileName($file);
+                $filePath = DataHelper::getFilePath(false, true);
+                $request->file('doctor_image')->storeAs($filePath, $fileName_doctor, 'public');
+
+                $Doctor = [
+                    'doctor_name' => $request->doctor_name,
+                    'doctor_image' => $fileName_doctor,
+                    'doctor_speciality' => $request->doctor_speciality,
+                ];
+            }else{
+                $Doctor = [
+                    'doctor_name' => $request->doctor_name,
+                    'doctor_speciality' => $request->doctor_speciality,
+                ];
+            }
 
             $Doctor->update($Doctor);
 
@@ -141,6 +161,11 @@ class DoctorController extends Controller
     public function destroy($id)
     {
         try {
+            $Doctor = Doctor::find($id);
+
+            $filePath = DataHelper::getFilePath(false, true);
+            Storage::delete('public/' . $filePath . $Doctor->doctor_image);
+
             Doctor::destroy($id);
 
             return ResponseFormatterHelper::successResponse('Doctor', 'Delete Doctor Success');

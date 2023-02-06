@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\NewsCategory;
 use App\Models\News;
 use App\Models\User;
+use App\Helpers\DataHelper;
 use App\Helpers\ResponseFormatterHelper;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
@@ -15,6 +17,7 @@ class NewsController extends Controller
     {
         // $this->middleware('auth');
         $this->component = "Component News";
+        $this->url = "https://klinikdralfred.nocturnailed.tech/";
     }
     /**
      * Display a listing of the resource.
@@ -26,8 +29,8 @@ class NewsController extends Controller
         $NewsCategories = NewsCategory::get();
         $News = News::get();
         $Users = User::get();
-
-        return view('news.index', compact('NewsCategories', 'News', 'Users'));
+        $url = $this->url;
+        return view('news.index', compact('NewsCategories', 'News', 'Users', 'url'));
     }
 
     /**
@@ -48,11 +51,16 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
+        $file = $request->news_image;
+        $fileName_news = DataHelper::getFileName($file);
+        $filePath = DataHelper::getFilePath(false, true);
+        $request->file('news_image')->storeAs($filePath, $fileName_news, 'public');
+
         $News = [
             'user_id' => Auth::user()->id,
             'news_category_id' => $request->news_category_id,
             'news_title' => $request->news_title,
-            'news_image' => $request->news_image,
+            'news_image' => $fileName_news,
             'news_description' => $request->news_description,
         ];
 
@@ -94,17 +102,33 @@ class NewsController extends Controller
     {
         $News = News::find($id);
 
+        if ($request->news_image <> "") {
+            Storage::delete('public/' . $filePath . $News->news_image);
+
+            $file = $request->news_image;
+            $fileName_news = DataHelper::getFileName($file);
+            $filePath = DataHelper::getFilePath(false, true);
+            $request->file('news_image')->storeAs($filePath, $fileName_news, 'public');
+
             $Newsv = [
                 'user_id' => Auth::user()->id,
                 'news_category_id' => $request->news_category_id,
                 'news_title' => $request->news_title,
-                'news_image' => $request->news_image,
+                'news_image' => $fileName_news,
                 'news_description' => $request->news_description,
             ];
+        }else{
+            $Newsv = [
+                'user_id' => Auth::user()->id,
+                'news_category_id' => $request->news_category_id,
+                'news_title' => $request->news_title,
+                'news_description' => $request->news_description,
+            ];
+        }
 
-            $News->update($Newsv);
+        $News->update($Newsv);
 
-            return redirect('news');
+        return redirect('news');
     }
 
     /**
@@ -115,6 +139,11 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
+        $News = News::find($id);
+
+        $filePath = DataHelper::getFilePath(false, true);
+        Storage::delete('public/' . $filePath . $News->news_image);
+
         News::destroy($id);
 
         return redirect('news');

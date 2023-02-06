@@ -68,9 +68,9 @@
                                     @endforeach
                                 </td>
                                 <td width="35%">{{ $Newsv->news_title }}</td>
-                                <td width="35%"><img src="{{ $Newsv->news_image }}" width="200" alt=""></td>
+                                <td width="35%"><img src="{{$url}}storage/{{ $Newsv->news_image }}" width="200" alt=""></td>
                                 <td width="15%">
-                                    @if($Newsv->id	 > 0)
+                                    @if($Newsv->id > 0)
                                     <a href="javascript:void(0)" class="btn btn-icon btnEdit btn-warning text-white"
                                         data-id="{{ $Newsv->id	 }}" data-toggle="tooltip"
                                         data-placement="top" title="Ubah">Ubah
@@ -141,7 +141,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                         <label class="form-label">Gambar Berita</label>
-                                        <input type="text" class="form-control" name="news_image"
+                                        <input type="file" class="form-control" name="news_image"
                                             id="news_image" placeholder="Masukan Gambar Berita"
                                             value="{{ old('news_image') }}">
 
