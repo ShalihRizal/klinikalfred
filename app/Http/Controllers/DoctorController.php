@@ -54,7 +54,7 @@ class DoctorController extends Controller
 
         $Doctor = [
             'doctor_name' => $request->doctor_name,
-            'doctor_image' => $fileName_doctor,
+            'doctor_image' => $filePath.$fileName_doctor,
             'doctor_speciality' => $request->doctor_speciality,
         ];
 
@@ -106,7 +106,7 @@ class DoctorController extends Controller
 
             $Doctorv = [
                 'doctor_name' => $request->doctor_name,
-                'doctor_image' => $fileName_doctor,
+                'doctor_image' => $filePath.$fileName_doctor,
                 'doctor_speciality' => $request->doctor_speciality,
             ];
         }else{

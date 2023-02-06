@@ -81,7 +81,7 @@ class NewsController extends Controller
                 'user_id' => $request->user_id,
                 'news_category_id' => $request->news_category_id,
                 'news_title' => $request->news_title,
-                'news_image' => $fileName_news,
+                'news_image' => $filePath.$fileName_news,
                 'news_description' => $request->news_description,
             ];
 
@@ -162,7 +162,7 @@ class NewsController extends Controller
                     'user_id' => $request->user_id,
                     'news_category_id' => $request->news_category_id,
                     'news_title' => $request->news_title,
-                    'news_image' => $fileName_news,
+                    'news_image' => $filePath.$fileName_news,
                     'news_description' => $request->news_description,
                 ];
             }else{
