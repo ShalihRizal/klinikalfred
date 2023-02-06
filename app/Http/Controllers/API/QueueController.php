@@ -23,7 +23,7 @@ class QueueController extends Controller
     public function index()
     {
         try {
-            $Queue = Queue::get();
+            $Queue = Queue::where('queue_status', 0)->orderBy('queue_number', 'asc')->get();
 
             $Queue_list = array("component" => $this->component, "data_component" => $Queue);
 
