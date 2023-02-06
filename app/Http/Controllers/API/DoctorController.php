@@ -27,7 +27,15 @@ class DoctorController extends Controller
         try {
             $Doctor = Doctor::get();
 
-            $doctor_list = array("component" => $this->component, "data_component" => $Doctor);
+            foreach ($Doctor as $value) {
+                $DoctorList[] = [
+                    'doctor_name' => $value->doctor_name,
+                    'doctor_image' => $this->url.'storage/'.$value->doctor_image,
+                    'doctor_speciality' => $value->doctor_speciality,
+                ];
+            }
+
+            $doctor_list = array("component" => $this->component, "data_component" => $DoctorList);
 
             if ($Doctor == null)
                 return ResponseFormatterHelper::successResponse(null, 'Data null');
@@ -89,7 +97,16 @@ class DoctorController extends Controller
         try {
             $Doctor = Doctor::find($id);
 
-            $doctor_list = array("component" => $this->component, "data_component" => $Doctor);
+            $DoctorList;
+            if ($Doctor) {
+                $DoctorList = [
+                    'doctor_name' => $Doctor->doctor_name,
+                    'doctor_image' => $this->url.'storage/'.$Doctor->doctor_image,
+                    'doctor_speciality' => $Doctor->doctor_speciality,
+                ];
+            }
+
+            $doctor_list = array("component" => $this->component, "data_component" => $DoctorList);
 
             if ($Doctor == null)
                 return ResponseFormatterHelper::successResponse(null, 'Data null');

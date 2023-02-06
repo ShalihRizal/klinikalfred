@@ -30,7 +30,7 @@
             <div class="row align-items-center">
               <div class="col">
                 <small class="text-muted mb-1">Jumlah Berita</small>
-                <h3 class="card-title mb-0">Tes</h3>
+                <h3 class="card-title mb-0">{{count($Newss)}}</h3>
 
               </div>
 

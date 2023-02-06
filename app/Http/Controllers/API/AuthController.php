@@ -10,7 +10,7 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-    public function updateProfile($email)
+    public function updateProfile(Request $request, $email)
     {
         $validator = Validator::make($request->all(),[
             'name' => 'required|string|max:255',

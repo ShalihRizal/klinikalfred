@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Queue;
 use App\Models\User;
+use App\Models\News;
 
 class HomeController extends Controller
 {
@@ -30,7 +31,8 @@ class HomeController extends Controller
         $progressQueues = Queue::where('queue_status', 1)->get();
         $finishQueues = Queue::where('queue_status', 2)->get();
         $Users = User::get();
+        $Newss = News::get();
 
-        return view('home', compact('Queues', 'Users', 'startQueues', 'progressQueues', 'finishQueues'));
+        return view('home', compact('Queues', 'Users', 'Newss', 'startQueues', 'progressQueues', 'finishQueues'));
     }
 }
