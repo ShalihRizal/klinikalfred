@@ -58,7 +58,7 @@ class QueueController extends Controller
     {
         try {
             $Queue = [
-                'user_id' => Auth::user()->id,
+                'user_id' => $request->user_id,
                 'queue_number' => $request->queue_number,
                 'priority_number' => $request->priority_number,
                 'queue_status' => $request->queue_status,
@@ -97,6 +97,30 @@ class QueueController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showByUser($user_id)
+    {
+        try {
+            $Queue = Queue::where('user_id', $user_id)->get();
+
+            $Queue_list = array("component" => $this->component, "data_component" => $Queue);
+
+            if ($Queue == null)
+                return ResponseFormatterHelper::successResponse(null, 'Data null');
+            else if ($Queue)
+                return ResponseFormatterHelper::successResponse($Queue_list, 'Success Get by ID Queue');
+            else
+                return ResponseFormatterHelper::errorResponse(null, 'Data null');
+        } catch (\Throwable $th) {
+            return ResponseFormatterHelper::errorResponse(null, $th);
+        }
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -120,7 +144,7 @@ class QueueController extends Controller
             $Queue = Queue::find($id);
 
             $Queues = [
-                'user_id' => Auth::user()->id,
+                'user_id' => $request->user_id,
                 'queue_number' => $request->queue_number,
                 'priority_number' => $request->priority_number,
                 'queue_status' => $request->queue_status,

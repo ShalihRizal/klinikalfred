@@ -59,7 +59,7 @@ class NewsController extends Controller
     {
         try {
             $News = [
-                'user_id' => Auth::user()->id,
+                'user_id' => $request->user_id,
                 'news_category_id' => $request->news_category_id,
                 'news_title' => $request->news_title,
                 'news_image' => $request->news_image,
@@ -122,7 +122,7 @@ class NewsController extends Controller
             $News = News::find($id);
 
             $News = [
-                'user_id' => Auth::user()->id,
+                'user_id' => $request->user_id,
                 'news_category_id' => $request->news_category_id,
                 'news_title' => $request->news_title,
                 'news_image' => $request->news_image,

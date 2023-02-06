@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\QueueController;
+use App\Http\Controllers\API\DoctorController;
 use App\Http\Controllers\API\NewsCategoryController;
 use App\Http\Controllers\API\NewsController;
 
@@ -36,9 +37,19 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::prefix('queue')->group(function () {
         Route::get('/', [QueueController::class, 'index'])->middleware(['cors']);
         Route::get('/show/{id}', [QueueController::class, 'show'])->middleware(['cors']);
+        Route::get('/show-user/{id}', [QueueController::class, 'showByUser'])->middleware(['cors']);
         Route::post('/store', [QueueController::class, 'store'])->middleware(['cors']);
         Route::post('/update/{id}', [QueueController::class, 'update'])->middleware(['cors']);
         Route::delete('/delete/{id}', [QueueController::class, 'destroy'])->middleware(['cors']);
+    });
+
+    // Doctor
+    Route::prefix('doctor')->group(function () {
+        Route::get('/', [DoctorController::class, 'index'])->middleware(['cors']);
+        Route::get('/show/{id}', [DoctorController::class, 'show'])->middleware(['cors']);
+        Route::post('/store', [DoctorController::class, 'store'])->middleware(['cors']);
+        Route::post('/update/{id}', [DoctorController::class, 'update'])->middleware(['cors']);
+        Route::delete('/delete/{id}', [DoctorController::class, 'destroy'])->middleware(['cors']);
     });
 
     // News Category
