@@ -119,6 +119,12 @@
                 </a>
               </li>
               <li class="nav-item ">
+                <a class="nav-link" href="/doctor">
+                  <i class="fe fe-users fe-16"></i>
+                  <span class="ml-3 item-text">Dokter</span>
+                </a>
+              </li>
+              <li class="nav-item ">
                 <a class="nav-link" href="/news-category">
                   <i class="fe fe-archive fe-16"></i>
                   <span class="ml-3 item-text">Kategori Berita</span>
