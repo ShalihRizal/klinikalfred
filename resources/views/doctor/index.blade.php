@@ -179,7 +179,7 @@
 
                 if (data.status == 1) {
                     $('#doctor_name').val(data.result.doctor_name);
-                    $('#doctor_image').val(data.result.doctor_image);
+                    // $('#doctor_image').val(data.result.doctor_image);
                     $('#doctor_speciality').val(data.result.doctor_speciality);
                     $('.addModal .modal-title').text('Ubah Dokter');
                     $('.addModal').modal('show');

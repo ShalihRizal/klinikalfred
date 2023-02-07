@@ -204,7 +204,7 @@
                 if (data.status == 1) {
                     $('#news_category_id').val(data.result.news_category_id);
                     $('#news_title').val(data.result.news_title);
-                    $('#news_image').val(data.result.news_image);
+                    // $('#news_image').val(data.result.news_image);
                     $('#news_description').val(data.result.news_description);
                     $('.addModal .modal-title').text('Ubah Berita');
                     $('.addModal').modal('show');
