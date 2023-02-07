@@ -33,7 +33,7 @@ class AuthController extends Controller
             $password = $Users->password;
         }
 
-        $user = [
+        $User = [
             'name' => $request->name,
             'email' => $request->email,
             'address' => $request->address,
@@ -45,7 +45,7 @@ class AuthController extends Controller
 
          $Users->update($User);
 
-        return response()->json($Users);
+        return response()->json($User);
     }
 
     public function register(Request $request)
