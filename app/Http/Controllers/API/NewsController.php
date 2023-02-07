@@ -35,7 +35,7 @@ class NewsController extends Controller
                     'news_category_id' => $value->news_category_id,
                     'news_category_name' => $value->news_category_name,
                     'news_title' => $value->news_title,
-                    'news_image' => $this->url.'/app/public/'.$value->news_image,
+                    'news_image' => $this->url.'app/public/'.$value->news_image,
                     'news_description' => $value->news_description,
                 ];
             }
@@ -110,7 +110,7 @@ class NewsController extends Controller
                     'news_category_id' => $News->news_category_id,
                     'news_category_name' => $News->news_category_name,
                     'news_title' => $News->news_title,
-                    'news_image' => $this->url.'/app/public/'.$News->news_image,
+                    'news_image' => $this->url.'app/public/'.$News->news_image,
                     'news_description' => $News->news_description,
                 ];
             }

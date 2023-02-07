@@ -60,7 +60,7 @@
                             <tr>
                                 <td width="5%">{{ $loop->iteration }}</td>
                                 <td width="35%">{{ $Doctorv->doctor_name }}</td>
-                                <td width="35%"><img src="{{$url}}/app/public/{{ $Doctorv->doctor_image }}" width="200" alt=""></td>
+                                <td width="35%"><img src="{{$url}}app/public/{{ $Doctorv->doctor_image }}" width="200" alt=""></td>
                                 <td width="15%">
                                     @if($Doctorv->id > 0)
                                     <a href="javascript:void(0)" class="btn btn-icon btnEdit btn-warning text-white"
