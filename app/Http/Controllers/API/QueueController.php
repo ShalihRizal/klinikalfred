@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Helpers\ResponseFormatterHelper;
 use Illuminate\Http\Request;
 use App\Models\Queue;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class QueueController extends Controller
