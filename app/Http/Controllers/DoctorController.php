@@ -97,7 +97,7 @@ class DoctorController extends Controller
         $Doctor = Doctor::find($id);
 
         if ($request->doctor_image <> "") {
-            Storage::delete('public/' . $filePath . $Doctor->doctor_image);
+            Storage::delete('public/app/public/'. $Doctor->doctor_image);
 
             $file = $request->doctor_image;
             $fileName_doctor = DataHelper::getFileName($file);
@@ -131,8 +131,7 @@ class DoctorController extends Controller
     {
         $Doctor = Doctor::find($id);
 
-        $filePath = DataHelper::getFilePath(false, true);
-        Storage::delete('public/' . $filePath . $Doctor->doctor_image);
+        Storage::delete('public/app/public/'. $Doctor->doctor_image);
 
         Doctor::destroy($id);
 
