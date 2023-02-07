@@ -25,7 +25,7 @@ class AuthController extends Controller
             return response()->json($validator->errors());
         }
 
-        $Users = User::find($id);
+        $Users = User::where('email', $email)->firstOrFail();
 
         if ($request->password != null) {
             $password = Hash::make($request->password);
