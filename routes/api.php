@@ -39,6 +39,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('/show/{id}', [QueueController::class, 'show'])->middleware(['cors']);
         Route::get('/show-user/{id}', [QueueController::class, 'showByUser'])->middleware(['cors']);
         Route::get('/show-email/{email}', [QueueController::class, 'showByEmail'])->middleware(['cors']);
+        Route::get('/show-email-history/{email}', [QueueController::class, 'showByEmailHistory'])->middleware(['cors']);
         Route::post('/store', [QueueController::class, 'store'])->middleware(['cors']);
         Route::post('/update/{id}', [QueueController::class, 'update'])->middleware(['cors']);
         Route::delete('/delete/{id}', [QueueController::class, 'destroy'])->middleware(['cors']);
