@@ -139,7 +139,7 @@ class QueueController extends Controller
             if ($Queue == null)
                 return ResponseFormatterHelper::successResponse(null, 'Data null');
             else if ($Queue)
-                return ResponseFormatterHelper::successResponse($Queue_list, 'Success Get by ID Queue');
+                return ResponseFormatterHelper::successResponse($Queue_list, 'Success Get by Email Queue');
             else
                 return ResponseFormatterHelper::errorResponse(null, 'Data null');
         } catch (\Throwable $th) {
