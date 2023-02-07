@@ -68,7 +68,7 @@
                                     @endforeach
                                 </td>
                                 <td width="35%">{{ $Newsv->news_title }}</td>
-                                <td width="35%"><img src="{{$url}}storage/{{ $Newsv->news_image }}" width="200" alt=""></td>
+                                <td width="35%"><img src="{{$url}}/app/public/{{ $Newsv->news_image }}" width="200" alt=""></td>
                                 <td width="15%">
                                     @if($Newsv->id > 0)
                                     <a href="javascript:void(0)" class="btn btn-icon btnEdit btn-warning text-white"

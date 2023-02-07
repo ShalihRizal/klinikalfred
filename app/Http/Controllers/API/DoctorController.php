@@ -30,7 +30,7 @@ class DoctorController extends Controller
             foreach ($Doctor as $value) {
                 $DoctorList[] = [
                     'doctor_name' => $value->doctor_name,
-                    'doctor_image' => $this->url.'storage/'.$value->doctor_image,
+                    'doctor_image' => $this->url.'/app/public/'.$value->doctor_image,
                     'doctor_speciality' => $value->doctor_speciality,
                 ];
             }
@@ -101,7 +101,7 @@ class DoctorController extends Controller
             if ($Doctor) {
                 $DoctorList = [
                     'doctor_name' => $Doctor->doctor_name,
-                    'doctor_image' => $this->url.'storage/'.$Doctor->doctor_image,
+                    'doctor_image' => $this->url.'/app/public/'.$Doctor->doctor_image,
                     'doctor_speciality' => $Doctor->doctor_speciality,
                 ];
             }
