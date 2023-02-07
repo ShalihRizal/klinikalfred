@@ -151,7 +151,9 @@ class NewsController extends Controller
         try {
             $News = News::find($id);
             if ($request->news_image <> "") {
-                Storage::delete('app/public/'. $News->news_image);
+                if ($News->news_image <> "") {
+                    unlink(public_path('app/public').'/'.$News->news_image);
+                }
 
                 $file = $request->news_image;
                 $fileName_news = DataHelper::getFileName($file);
@@ -193,7 +195,9 @@ class NewsController extends Controller
         try {
             $News = News::find($id);
 
-            Storage::delete('app/public/'. $News->news_image);
+            if ($News->news_image <> "") {
+                unlink(public_path('app/public').'/'.$News->news_image);
+            }
 
             News::destroy($id);
 
