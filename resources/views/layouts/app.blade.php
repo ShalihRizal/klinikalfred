@@ -88,7 +88,7 @@
                             </span>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="/profile">Profile</a>
+              {{-- <a class="dropdown-item" href="/profile">Profile</a> --}}
               <a class="dropdown-item logout" data-url="/logout">Keluar</a>
             </div>
           </li>
