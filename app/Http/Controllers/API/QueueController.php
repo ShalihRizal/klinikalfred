@@ -58,12 +58,26 @@ class QueueController extends Controller
     public function store(Request $request)
     {
         try {
-            $Queue = [
-                'user_id' => $request->user_id,
-                'queue_number' => $request->queue_number,
-                'priority_number' => $request->priority_number,
-                'queue_status' => $request->queue_status,
-            ];
+            $Queues = Queue::orderBy('created_at', 'desc')->first();
+
+            $created_at_old = explode(" ", $Queues->created_at);
+            $created_at_new = date('Y-m-d');
+
+            if ($created_at_old[0] != $created_at_new) {
+                $Queue = [
+                    'user_id' => $request->user_id,
+                    'queue_number' => 1,
+                    'priority_number' => $request->priority_number,
+                    'queue_status' => $request->queue_status,
+                ];
+            }else{
+                $Queue = [
+                    'user_id' => $request->user_id,
+                    'queue_number' => intval($Queues->queue_number) + 1,
+                    'priority_number' => $request->priority_number,
+                    'queue_status' => $request->queue_status,
+                ];
+            }
 
 		    Queue::create($Queue);
 
