@@ -16,6 +16,7 @@ class DoctorController extends Controller
     {
         // $this->middleware('auth');
         $this->component = "Component Doctor";
+        $this->url = "https://klinikdralfred.nocturnailed.tech/";
     }
     /**
      * Display a listing of the resource.
@@ -24,7 +25,7 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        // try {
+        try {
             $Doctor = Doctor::get();
 
             foreach ($Doctor as $value) {
@@ -43,9 +44,9 @@ class DoctorController extends Controller
                 return ResponseFormatterHelper::successResponse($doctor_list, 'Success Get All Doctor');
             else
                 return ResponseFormatterHelper::errorResponse(null, 'Data null');
-        // } catch (\Throwable $th) {
-        //     return ResponseFormatterHelper::errorResponse(null, $th);
-        // }
+        } catch (\Throwable $th) {
+            return ResponseFormatterHelper::errorResponse(null, $th);
+        }
     }
 
     /**
