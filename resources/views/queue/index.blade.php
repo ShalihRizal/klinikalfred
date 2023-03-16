@@ -126,7 +126,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-label">Pengguna </label>
-                                    <select class="form-control" name="user_id" id="user_id">
+                                    <select class="form-control" name="user_id" id="user_id" required>
                                         <option value="">- Pilih Pengguna -</option>
                                         @if(sizeof($Users) > 0)
                                         @foreach($Users as $User)
@@ -153,12 +153,12 @@
                                         <label class="form-label">Prioritas</label>
                                         <input type="text" class="form-control" name="priority_number"
                                             id="priority_number" placeholder="Masukan Prioritas Antrian"
-                                            value="{{ old('priority_number') }}">
+                                            value="{{ old('priority_number') }}" required>
 
                                     </div>
                                 </div>
 
-                            <div class="col-md-12">
+                            {{-- <div class="col-md-12">
                                 <div class="form-group">
                                         <label class="form-label">Posisi Antrian</label>
                                         <input type="text" class="form-control" name="queue_number"
@@ -166,12 +166,12 @@
                                             value="{{ old('queue_number') }}">
 
                                     </div>
-                                </div>
+                                </div> --}}
 
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-label">Pilih Status </label>
-                                    <select class="form-control" name="queue_status" id="queue_status">
+                                    <select class="form-control" name="queue_status" id="queue_status" required>
                                         <option value="">- Pilih Status -</option>
                                         <option value="2">Sudah dilayani</option>
                                         <option value="1">Sedang dilayani</option>

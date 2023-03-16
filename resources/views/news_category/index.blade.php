@@ -108,7 +108,7 @@
                                         <label class="form-label">Nama Kategori Berita</label>
                                         <input type="text" class="form-control" name="news_category_name"
                                             id="news_category_name" placeholder="Masukan Nama Kategori Berita"
-                                            value="{{ old('news_category_name') }}">
+                                            value="{{ old('news_category_name') }}" required>
 
                                     </div>
                                 </div>

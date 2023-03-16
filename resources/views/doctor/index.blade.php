@@ -110,7 +110,7 @@
                                         <label class="form-label">Nama Dokter</label>
                                         <input type="text" class="form-control" name="doctor_name"
                                             id="doctor_name" placeholder="Masukan Nama Dokter"
-                                            value="{{ old('doctor_name') }}">
+                                            value="{{ old('doctor_name') }}" required>
 
                                     </div>
                                 </div>
@@ -130,7 +130,7 @@
                                             <label class="form-label">Spesialis Dokter</label>
                                             <input type="text" class="form-control" name="doctor_speciality"
                                                 id="doctor_speciality" placeholder="Masukan Spesialis Dokter"
-                                                value="{{ old('doctor_speciality') }}">
+                                                value="{{ old('doctor_speciality') }}" required>
 
                                         </div>
                                     </div>

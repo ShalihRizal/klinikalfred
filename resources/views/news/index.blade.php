@@ -116,7 +116,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-label">Kategori Berita </label>
-                                    <select class="form-control" name="news_category_id" id="news_category_id">
+                                    <select class="form-control" name="news_category_id" id="news_category_id" required>
                                         <option value="">- Pilih Kategori Berita -</option>
                                         @if(sizeof($NewsCategories) > 0)
                                         @foreach($NewsCategories as $NewsCategory)
@@ -133,7 +133,7 @@
                                         <label class="form-label">Judul Berita</label>
                                         <input type="text" class="form-control" name="news_title"
                                             id="news_title" placeholder="Masukan Judul Berita"
-                                            value="{{ old('news_title') }}">
+                                            value="{{ old('news_title') }}" required>
 
                                     </div>
                                 </div>
@@ -151,7 +151,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                             <label class="form-label">Deskripsi Berita</label>
-                                            <textarea name="news_description" id="news_description" class="form-control" cols="30" rows="10">{{ old('news_description') }}</textarea>
+                                            <textarea name="news_description" id="news_description" class="form-control" cols="30" rows="10" required>{{ old('news_description') }}</textarea>
                                             {{-- <input type="text" class="form-control" name="news_description"
                                                 id="news_description" placeholder="Masukan Deskripsi Berita"
                                                 value="{{ old('news_description') }}"> --}}
