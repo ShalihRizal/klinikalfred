@@ -26,7 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $Queues = Queue::where('queue_status', 0)->orderBy('queue_number', 'asc')->get();
+        $Queues = Queue::where('queue_status', 0)->orwhere('queue_status', 1)->orderBy('queue_number', 'asc')->get();
         $startQueues = Queue::where('queue_status', 0)->get();
         $progressQueues = Queue::where('queue_status', 1)->get();
         $finishQueues = Queue::where('queue_status', 2)->get();
