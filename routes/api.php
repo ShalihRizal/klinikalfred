@@ -24,6 +24,9 @@ Route::post('/register', [AuthController::class, 'register'])->middleware(['cors
 //API route for login user
 Route::post('/login', [AuthController::class, 'login'])->middleware(['cors']);
 
+// doctor
+Route::get('/doctor', [DoctorController::class, 'index'])->middleware(['cors']);
+
 //Protecting Routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/profile', function(Request $request) {
