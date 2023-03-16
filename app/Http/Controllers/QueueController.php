@@ -69,7 +69,7 @@ class QueueController extends Controller
             }else{
                 $Queue = [
                     'user_id' => $request->user_id,
-                    'queue_number' => intval($Queues->queue_number) + 1,
+                    'queue_number' => 1,
                     'priority_number' => $request->priority_number,
                     'queue_status' => $request->queue_status,
                 ];
