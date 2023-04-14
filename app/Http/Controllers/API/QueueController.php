@@ -58,7 +58,7 @@ class QueueController extends Controller
     public function store(Request $request)
     {
         try {
-            $Queues = Queue::where('queue_status', 0)->orwhere('queue_status', 1)->orderBy('created_at', 'desc')->first();
+            $Queues = Queue::orderBy('created_at', 'desc')->first();
             if ($Queues != null) {
                 $created_at_old = explode(" ", $Queues->created_at);
                 $created_at_new = date('Y-m-d');
@@ -154,7 +154,7 @@ class QueueController extends Controller
         try {
             $user = User::where('email', $email)->firstOrFail();
 
-            $Queue = Queue::where('user_id', $user->id)->first();
+            $Queue = Queue::where('queue_status', 0)->orwhere('queue_status', 1)->where('user_id', $user->id)->first();
 
             $Queue_list = array("component" => $this->component, "data_component" => $Queue);
 
