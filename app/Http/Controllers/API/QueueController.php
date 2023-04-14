@@ -58,7 +58,7 @@ class QueueController extends Controller
     public function store(Request $request)
     {
         try {
-            $Queues = Queue::orderBy('created_at', 'desc')->first();
+            $Queues = Queue::where('queue_status', 0)->orderBy('created_at', 'desc')->first();
             if ($Queues != null) {
                 $created_at_old = explode(" ", $Queues->created_at);
                 $created_at_new = date('Y-m-d');
