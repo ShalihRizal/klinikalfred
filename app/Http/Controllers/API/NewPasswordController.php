@@ -28,9 +28,13 @@ class NewPasswordController extends Controller
             ];
         }
 
-        throw ValidationException::withMessages([
+        // throw ValidationException::withMessages([
+        //     'email' => [trans($status)],
+        // ]);
+
+        return response([
             'email' => [trans($status)],
-        ]);
+        ], 500);
     }
 
     public function reset(Request $request)
