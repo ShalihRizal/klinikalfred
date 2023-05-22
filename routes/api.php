@@ -7,6 +7,8 @@ use App\Http\Controllers\API\QueueController;
 use App\Http\Controllers\API\DoctorController;
 use App\Http\Controllers\API\NewsCategoryController;
 use App\Http\Controllers\API\NewsController;
+use App\Http\Controllers\API\EmailVerificationController;
+use App\Http\Controllers\API\NewPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +25,16 @@ use App\Http\Controllers\API\NewsController;
 Route::post('/register', [AuthController::class, 'register'])->middleware(['cors']);
 //API route for login user
 Route::post('/login', [AuthController::class, 'login'])->middleware(['cors']);
+
+//API route for verification notification
+Route::post('email/verification-notification', [EmailVerificationController::class, 'sendVerificationEmail'])->middleware('auth:sanctum');
+//API route for verify email
+Route::get('verify-email/{id}/{hash}', [EmailVerificationController::class, 'verify'])->name('verification.verify')->middleware('auth:sanctum');
+
+//API route for forgot password user
+Route::post('forgot-password', [NewPasswordController::class, 'forgotPassword'])->middleware(['cors']);
+//API route for reset password user
+Route::post('reset-password', [NewPasswordController::class, 'reset'])->middleware(['cors']);
 
 //Protecting Routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
