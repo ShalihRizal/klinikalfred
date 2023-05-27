@@ -45,4 +45,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function sendPasswordResetNotification($token)
+    {
+
+        $url = 'https://klinikdralfred.nocturnailed.tech/reset-password?token=' . $token;
+
+        $this->notify(new ResetPasswordNotification($url));
+    }
 }
