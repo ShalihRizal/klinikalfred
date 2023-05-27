@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Queue;
 use App\Models\User;
+use App\Models\News;
 
 class HomeController extends Controller
 {
@@ -25,12 +26,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $Queues = Queue::get();
+        $Queues = Queue::where('queue_status', 0)->orwhere('queue_status', 1)->orderBy('queue_number', 'asc')->get();
         $startQueues = Queue::where('queue_status', 0)->get();
         $progressQueues = Queue::where('queue_status', 1)->get();
         $finishQueues = Queue::where('queue_status', 2)->get();
         $Users = User::get();
+        $Newss = News::get();
 
-        return view('home', compact('Queues', 'Users', 'startQueues', 'progressQueues', 'finishQueues'));
+        return view('home', compact('Queues', 'Users', 'Newss', 'startQueues', 'progressQueues', 'finishQueues'));
     }
 }

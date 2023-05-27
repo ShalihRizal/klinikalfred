@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Helpers\ResponseFormatterHelper;
 use Illuminate\Http\Request;
 use App\Models\Queue;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class QueueController extends Controller
@@ -23,7 +24,7 @@ class QueueController extends Controller
     public function index()
     {
         try {
-            $Queue = Queue::get();
+            $Queue = Queue::where('queue_status', 0)->orderBy('queue_number', 'asc')->get();
 
             $Queue_list = array("component" => $this->component, "data_component" => $Queue);
 
@@ -57,11 +58,34 @@ class QueueController extends Controller
     public function store(Request $request)
     {
         try {
-            $Queue = [
-                'user_id' => Auth::user()->id,
-                'queue_number' => $request->queue_number,
-                'queue_status' => $request->queue_status,
-            ];
+            $Queues = Queue::orderBy('created_at', 'desc')->first();
+            if ($Queues != null) {
+                $created_at_old = explode(" ", $Queues->created_at);
+                $created_at_new = date('Y-m-d');
+
+                if ($created_at_old[0] != $created_at_new) {
+                    $Queue = [
+                        'user_id' => $request->user_id,
+                        'queue_number' => 1,
+                        'priority_number' => $request->priority_number,
+                        'queue_status' => $request->queue_status,
+                    ];
+                }else{
+                    $Queue = [
+                        'user_id' => $request->user_id,
+                        'queue_number' => intval($Queues->queue_number) + 1,
+                        'priority_number' => $request->priority_number,
+                        'queue_status' => $request->queue_status,
+                    ];
+                }
+            }else{
+                $Queue = [
+                    'user_id' => $request->user_id,
+                    'queue_number' => 1,
+                    'priority_number' => $request->priority_number,
+                    'queue_status' => $request->queue_status,
+                ];
+            }
 
 		    Queue::create($Queue);
 
@@ -96,6 +120,82 @@ class QueueController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showByUser($user_id)
+    {
+        try {
+            $Queue = Queue::where('user_id', $user_id)->get();
+
+            $Queue_list = array("component" => $this->component, "data_component" => $Queue);
+
+            if ($Queue == null)
+                return ResponseFormatterHelper::successResponse(null, 'Data null');
+            else if ($Queue)
+                return ResponseFormatterHelper::successResponse($Queue_list, 'Success Get by ID Queue');
+            else
+                return ResponseFormatterHelper::errorResponse(null, 'Data null');
+        } catch (\Throwable $th) {
+            return ResponseFormatterHelper::errorResponse(null, $th);
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showByEmail($email)
+    {
+        try {
+            $user = User::where('email', $email)->firstOrFail();
+
+            $Queue = Queue::where('queue_status', 0)->orwhere('queue_status', 1)->where('user_id', $user->id)->first();
+
+            $Queue_list = array("component" => $this->component, "data_component" => $Queue);
+
+            if ($Queue == null)
+                return ResponseFormatterHelper::successResponse(null, 'Data null');
+            else if ($Queue)
+                return ResponseFormatterHelper::successResponse($Queue_list, 'Success Get by Email Queue');
+            else
+                return ResponseFormatterHelper::errorResponse(null, 'Data null');
+        } catch (\Throwable $th) {
+            return ResponseFormatterHelper::errorResponse(null, $th);
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showByEmailHistory($email)
+    {
+        try {
+            $user = User::where('email', $email)->firstOrFail();
+
+            $Queue = Queue::where('user_id', $user->id)->get();
+
+            $Queue_list = array("component" => $this->component, "data_component" => $Queue);
+
+            if ($Queue == null)
+                return ResponseFormatterHelper::successResponse(null, 'Data null');
+            else if ($Queue)
+                return ResponseFormatterHelper::successResponse($Queue_list, 'Success Get by Email Queue');
+            else
+                return ResponseFormatterHelper::errorResponse(null, 'Data null');
+        } catch (\Throwable $th) {
+            return ResponseFormatterHelper::errorResponse(null, $th);
+        }
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -119,8 +219,9 @@ class QueueController extends Controller
             $Queue = Queue::find($id);
 
             $Queues = [
-                'user_id' => Auth::user()->id,
+                'user_id' => $request->user_id,
                 'queue_number' => $request->queue_number,
+                'priority_number' => $request->priority_number,
                 'queue_status' => $request->queue_status,
             ];
 

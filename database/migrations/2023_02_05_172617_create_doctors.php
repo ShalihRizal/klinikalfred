@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('queues', function (Blueprint $table) {
+        Schema::create('doctors', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id');
-            $table->bigInteger('queue_number');
-            $table->bigInteger('priority_number');
-            $table->integer('queue_status')->default(0);
+            $table->string('doctor_name');
+            $table->tinyText('doctor_image');
+            $table->text('doctor_speciality');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('queues');
+        Schema::dropIfExists('doctors');
     }
 };

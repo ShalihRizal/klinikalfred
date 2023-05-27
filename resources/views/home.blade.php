@@ -30,7 +30,7 @@
             <div class="row align-items-center">
               <div class="col">
                 <small class="text-muted mb-1">Jumlah Berita</small>
-                <h3 class="card-title mb-0">Tes</h3>
+                <h3 class="card-title mb-0">{{count($Newss)}}</h3>
 
               </div>
 
@@ -186,6 +186,16 @@
 
                                                             </div>
                                                         </div>
+
+                                                        <div class="col-md-12" hidden>
+                                                            <div class="form-group">
+                                                                    <label class="form-label">Prioritas Antrian</label>
+                                                                    <input type="text" class="form-control" name="priority_number"
+                                                                        id="priority_number" placeholder="Masukan Prioritas Antrian"
+                                                                        value="{{$Queue->priority_number}}{{ old('priority_number') }}">
+
+                                                                </div>
+                                                            </div>
 
                                                     <div class="col-md-12" hidden>
                                                         <div class="form-group">

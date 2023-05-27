@@ -10,11 +10,53 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
+    public function updateProfile(Request $request, $email)
+    {
+        $validator = Validator::make($request->all(),[
+            'name' => 'required',
+            'email' => 'required',
+            'address' => 'required',
+            'date_of_birth' => 'required',
+            'age' => 'required',
+            'gender' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors());
+        }
+
+        $Users = User::where('email', $email)->firstOrFail();
+
+        if ($request->password != null) {
+            $password = Hash::make($request->password);
+        }else{
+            $password = $Users->password;
+        }
+
+        $User = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'address' => $request->address,
+            'date_of_birth' => $request->date_of_birth,
+            'age' => $request->age,
+            'gender' => $request->gender,
+            'password' => $password
+         ];
+
+         $Users->update($User);
+
+        return response()->json($User);
+    }
+
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(),[
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+            'address' => 'required',
+            'date_of_birth' => 'required',
+            'age' => 'required',
+            'gender' => 'required',
             'password' => 'required|string|min:8'
         ]);
 
@@ -25,6 +67,10 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'address' => $request->address,
+            'date_of_birth' => $request->date_of_birth,
+            'age' => $request->age,
+            'gender' => $request->gender,
             'password' => Hash::make($request->password)
          ]);
 
@@ -48,6 +94,13 @@ class AuthController extends Controller
 
         return response()
             ->json(['message' => 'Hi '.$user->name.', welcome to home','access_token' => $token, 'token_type' => 'Bearer', ]);
+    }
+
+    public function getProfile($email)
+    {
+        $user = User::where('email', $email)->firstOrFail();
+
+        return response()->json($user);
     }
 
     // method for user logout and delete token

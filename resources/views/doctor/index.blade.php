@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Kategori Berita')
+@section('title', 'Dokter')
 
 
 @section('content')
@@ -26,7 +26,7 @@
                 @endif
                 <div class="row">
                     <div class="col-md-6">
-                        <h3 class="h3">Kategori Berita</h3>
+                        <h3 class="h3">Dokter</h3>
                     </div>
                     <div class="col-md-6">
 
@@ -36,7 +36,7 @@
             <div class="card-body">
                 {{-- <div class="addData"> --}}
                 <a href="javascript:void(0)" class="btn btn-success btnAdd mb-3">
-                    <strong class="text-white">{{-- <i class="fe fe-plus fe-16"></i> --}} Tambah Kategori Berita</strong>
+                    <strong class="text-white">{{-- <i class="fe fe-plus fe-16"></i> --}} Tambah Dokter</strong>
                 </a>
                 {{-- </div> --}}
 
@@ -45,28 +45,30 @@
                         <thead>
                             <tr>
                                 <th width="5%">No</th>
-                                <th width="35%">Nama Kategori</th>
+                                <th width="35%">Nama</th>
+                                <th width="35%">Gambar</th>
                                 <th width="15%">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @if (count($NewsCategories) == 0)
+                            @if (count($Doctor) == 0)
                             <tr>
-                                <td colspan="3" align="center">Data kosong</td>
+                                <td colspan="5" align="center">Data kosong</td>
                             </tr>
                             @else
-                            @foreach ($NewsCategories as $NewsCategory)
+                            @foreach ($Doctor as $Doctorv)
                             <tr>
                                 <td width="5%">{{ $loop->iteration }}</td>
-                                <td width="35%">{{ $NewsCategory->news_category_name }}</td>
+                                <td width="35%">{{ $Doctorv->doctor_name }}</td>
+                                <td width="35%"><img src="{{$url}}app/public/{{ $Doctorv->doctor_image }}" width="200" alt=""></td>
                                 <td width="15%">
-                                    @if($NewsCategory->id	 > 0)
+                                    @if($Doctorv->id > 0)
                                     <a href="javascript:void(0)" class="btn btn-icon btnEdit btn-warning text-white"
-                                        data-id="{{ $NewsCategory->id	 }}" data-toggle="tooltip"
+                                        data-id="{{ $Doctorv->id }}" data-toggle="tooltip"
                                         data-placement="top" title="Ubah">Ubah
                                     </a>
                                     <a href="javascript:void(0)" class="btn btn-icon btn-danger btnDelete text-white"
-                                        data-url="{{ url('news-category/delete/'. $NewsCategory->id	) }}"
+                                        data-url="{{ url('doctor/delete/'. $Doctorv->id	) }}"
                                         data-toggle="tooltip" data-placement="top" title="Hapus">Hapus
                                     </a>
                                     @endif
@@ -94,10 +96,10 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Tambah Kategori Berita</h5>
+                <h5 class="modal-title">Tambah Dokter</h5>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-            <form action="{{ url('news-category/store') }}" method="POST" id="addForm">
+            <form action="{{ url('doctor/store') }}" method="POST" id="addForm" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     <div class="form-body">
@@ -105,13 +107,33 @@
 
                             <div class="col-md-12">
                                 <div class="form-group">
-                                        <label class="form-label">Nama Kategori Berita</label>
-                                        <input type="text" class="form-control" name="news_category_name"
-                                            id="news_category_name" placeholder="Masukan Nama Kategori Berita"
-                                            value="{{ old('news_category_name') }}" required>
+                                        <label class="form-label">Nama Dokter</label>
+                                        <input type="text" class="form-control" name="doctor_name"
+                                            id="doctor_name" placeholder="Masukan Nama Dokter"
+                                            value="{{ old('doctor_name') }}" required>
 
                                     </div>
                                 </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                        <label class="form-label">Gambar Dokter</label>
+                                        <input type="file" class="form-control" name="doctor_image"
+                                            id="doctor_image" placeholder="Masukan Gambar Dokter"
+                                            value="{{ old('doctor_image') }}">
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                            <label class="form-label">Spesialis Dokter</label>
+                                            <input type="text" class="form-control" name="doctor_speciality"
+                                                id="doctor_speciality" placeholder="Masukan Spesialis Dokter"
+                                                value="{{ old('doctor_speciality') }}" required>
+
+                                        </div>
+                                    </div>
 
                         </div>
                     </div>
@@ -131,8 +153,8 @@
 <script type="text/javascript">
     $('.btnAdd').click(function () {
         document.getElementById("addForm").reset();
-        $('.addModal form').attr('action', "{{ url('news-category/store') }}");
-        $('.addModal .modal-title').text('Tambah Kategori Berita');
+        $('.addModal form').attr('action', "{{ url('doctor/store') }}");
+        $('.addModal .modal-title').text('Tambah Doktor');
         $('.addModal').modal('show');
     });
 
@@ -144,9 +166,9 @@
     $('.btnEdit').click(function () {
 
         var id = $(this).attr('data-id');
-        var url = "{{ url('news-category/getdata') }}";
+        var url = "{{ url('doctor/getdata') }}";
 
-        $('.addModal form').attr('action', "{{ url('news-category/update') }}" + '/' + id);
+        $('.addModal form').attr('action', "{{ url('doctor/update') }}" + '/' + id);
 
         $.ajax({
             type: 'GET',
@@ -156,8 +178,10 @@
                 console.log(data);
 
                 if (data.status == 1) {
-                    $('#news_category_name').val(data.result.news_category_name);
-                    $('.addModal .modal-title').text('Ubah Kategori Berita');
+                    $('#doctor_name').val(data.result.doctor_name);
+                    // $('#doctor_image').val(data.result.doctor_image);
+                    $('#doctor_speciality').val(data.result.doctor_speciality);
+                    $('.addModal .modal-title').text('Ubah Dokter');
                     $('.addModal').modal('show');
 
                 }
@@ -216,7 +240,7 @@
             queue_number: "required",
         },
         messages: {
-            user_id: "Kategori Berita tidak boleh kosong",
+            user_id: "Berita tidak boleh kosong",
             queue_status: "Pilih status",
             queue_number: "Data tidak boleh kosong",
         },

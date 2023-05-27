@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\QueueController;
 use App\Http\Controllers\NewsCategoryController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\DoctorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,4 +58,14 @@ Route::prefix('news')->group(function () {
     Route::post('/update/{id}', [NewsController::class, 'update']);
     Route::get('/delete/{id}', [NewsController::class, 'destroy']);
     Route::get('/getdata/{id}', [NewsController::class, 'getdata']);
+});
+
+// Doctor
+Route::prefix('doctor')->group(function () {
+    Route::get('/', [DoctorController::class, 'index']);
+    Route::get('/show/{id}', [DoctorController::class, 'show']);
+    Route::post('/store', [DoctorController::class, 'store']);
+    Route::post('/update/{id}', [DoctorController::class, 'update']);
+    Route::get('/delete/{id}', [DoctorController::class, 'destroy']);
+    Route::get('/getdata/{id}', [DoctorController::class, 'getdata']);
 });

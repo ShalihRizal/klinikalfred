@@ -88,7 +88,7 @@
                             </span>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="/profile">Profile</a>
+              {{-- <a class="dropdown-item" href="/profile">Profile</a> --}}
               <a class="dropdown-item logout" data-url="/logout">Keluar</a>
             </div>
           </li>
@@ -116,6 +116,24 @@
                 <a class="nav-link" href="/queue">
                   <i class="fe fe-activity fe-16"></i>
                   <span class="ml-3 item-text">Antrian</span>
+                </a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/doctor">
+                  <i class="fe fe-users fe-16"></i>
+                  <span class="ml-3 item-text">Dokter</span>
+                </a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/news-category">
+                  <i class="fe fe-archive fe-16"></i>
+                  <span class="ml-3 item-text">Kategori Berita</span>
+                </a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/news">
+                  <i class="fe fe-bookmark fe-16"></i>
+                  <span class="ml-3 item-text">Berita</span>
                 </a>
               </li>
 

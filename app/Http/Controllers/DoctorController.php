@@ -3,20 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\NewsCategory;
-use App\Models\News;
-use App\Models\User;
+use App\Models\Doctor;
 use App\Helpers\DataHelper;
 use App\Helpers\ResponseFormatterHelper;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
-class NewsController extends Controller
+class DoctorController extends Controller
 {
     public function __construct()
     {
         // $this->middleware('auth');
-        $this->component = "Component News";
+        $this->component = "Component Doctor";
         $this->url = "https://klinikdralfred.nocturnailed.tech/";
     }
     /**
@@ -26,11 +24,9 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $NewsCategories = NewsCategory::get();
-        $News = News::get();
-        $Users = User::get();
+        $Doctor = Doctor::get();
         $url = $this->url;
-        return view('news.index', compact('NewsCategories', 'News', 'Users', 'url'));
+        return view('doctor.index', compact('Doctor', 'url'));
     }
 
     /**
@@ -51,22 +47,20 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        $file = $request->news_image;
-        $fileName_news = DataHelper::getFileName($file);
+        $file = $request->doctor_image;
+        $fileName_doctor = DataHelper::getFileName($file);
         $filePath = DataHelper::getFilePath(false, true);
-        $request->file('news_image')->storeAs($filePath, $fileName_news, 'public');
+        $request->file('doctor_image')->storeAs($filePath, $fileName_doctor, 'public');
 
-        $News = [
-            'user_id' => Auth::user()->id,
-            'news_category_id' => $request->news_category_id,
-            'news_title' => $request->news_title,
-            'news_image' => $filePath.$fileName_news,
-            'news_description' => $request->news_description,
+        $Doctor = [
+            'doctor_name' => $request->doctor_name,
+            'doctor_image' => $filePath.$fileName_doctor,
+            'doctor_speciality' => $request->doctor_speciality,
         ];
 
-        News::create($News);
+        Doctor::create($Doctor);
 
-        return redirect('news');
+        return redirect('doctor');
     }
 
     /**
@@ -100,37 +94,33 @@ class NewsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $News = News::find($id);
+        $Doctor = Doctor::find($id);
 
-        if ($request->news_image <> "") {
-            if ($News->news_image <> "") {
-                unlink(public_path('app/public').'/'.$News->news_image);
+        if ($request->doctor_image <> "") {
+            if ($Doctor->doctor_image <> "") {
+                unlink(public_path('app/public').'/'.$Doctor->doctor_image);
             }
 
-            $file = $request->news_image;
-            $fileName_news = DataHelper::getFileName($file);
+            $file = $request->doctor_image;
+            $fileName_doctor = DataHelper::getFileName($file);
             $filePath = DataHelper::getFilePath(false, true);
-            $request->file('news_image')->storeAs($filePath, $fileName_news, 'public');
+            $request->file('doctor_image')->storeAs($filePath, $fileName_doctor, 'public');
 
-            $Newsv = [
-                'user_id' => Auth::user()->id,
-                'news_category_id' => $request->news_category_id,
-                'news_title' => $request->news_title,
-                'news_image' => $filePath.$fileName_news,
-                'news_description' => $request->news_description,
+            $Doctorv = [
+                'doctor_name' => $request->doctor_name,
+                'doctor_image' => $filePath.$fileName_doctor,
+                'doctor_speciality' => $request->doctor_speciality,
             ];
         }else{
-            $Newsv = [
-                'user_id' => Auth::user()->id,
-                'news_category_id' => $request->news_category_id,
-                'news_title' => $request->news_title,
-                'news_description' => $request->news_description,
+            $Doctorv = [
+                'doctor_name' => $request->doctor_name,
+                'doctor_speciality' => $request->doctor_speciality,
             ];
         }
 
-        $News->update($Newsv);
+        $Doctor->update($Doctorv);
 
-        return redirect('news');
+        return redirect('doctor');
     }
 
     /**
@@ -141,15 +131,15 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        $News = News::find($id);
+        $Doctor = Doctor::find($id);
 
-        if ($News->news_image <> "") {
-            unlink(public_path('app/public').'/'.$News->news_image);
+        if ($Doctor->doctor_image <> "") {
+            unlink(public_path('app/public').'/'.$Doctor->doctor_image);
         }
 
-        News::destroy($id);
+        Doctor::destroy($id);
 
-        return redirect('news');
+        return redirect('doctor');
     }
 
     /**
@@ -159,7 +149,7 @@ class NewsController extends Controller
      */
     public function getdata($id)
     {
-        $getDetail  = News::find($id);
+        $getDetail  = Doctor::find($id);
 
         if ($getDetail)
             return ResponseFormatterHelper::_successResponse($getDetail, 'Data berhasil ditemukan');
